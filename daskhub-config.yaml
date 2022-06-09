@@ -1,0 +1,28 @@
+# file: daskhub-config.yaml
+jupyterhub:
+  proxy:
+    secretToken: <token-1>
+  scheduling:
+    podPriority:
+      enabled: true
+    userPlaceholder:
+      # Specify three dummy user pods will be used as placeholders
+      replicas: 1
+    userScheduler:
+      enabled: true
+  singleuser:
+    serviceAccountName: daskkubernetes
+    image:
+      name: guillaumeeb/pangeo-ml-notebook # Image to use for singleuser environment. Must include dask-kubernetes.
+      tag: 2021.11.14
+
+dask-gateway:
+  enabled: false
+  gateway:
+    auth:
+      type: simple
+      simple:
+        password: "unused"
+
+dask-kubernetes:
+  enabled: true
